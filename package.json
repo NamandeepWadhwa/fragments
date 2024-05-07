@@ -1,6 +1,6 @@
 {
   "name": "fragments",
-  "private":true,
+  "private": true,
   "version": "0.0.1",
   "description": "Fragments back-end API",
   "scripts": {
@@ -11,5 +11,8 @@
     "url": "git+https://github.com/NamandeepWadhwa/fragments.git"
   },
   "author": "Namandeep Singh Wadhwa",
-  "license": "UNLICENSED"
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "prettier": "3.2.5"
+  }
 }
