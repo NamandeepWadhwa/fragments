@@ -10,4 +10,5 @@ Make sure all packages are up-to-date before running scripts. The current depend
 - cors
 - helmet
 - compression
+- Pino 
 
