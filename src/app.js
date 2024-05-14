@@ -9,7 +9,11 @@ const app = express();
 app.use(pino);
 app.use(cros());
 app.use(helmet());
+const passport = require('passport');
+const authenticate = require('./auth');
 app.use(compression());
+passport.use(authenticate.strategy());
+app.use(passport.initialize());
 
 app.use('/', require('./routes'));
 // Add 404 middleware to handle any requests for resources that can't be found
