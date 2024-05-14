@@ -3,7 +3,6 @@ const cros = require('cors');
 const helmet = require('helmet');
 const compression = require('compression');
 
-const { author, version } = require('../package.json');
 const logger = require('./logger');
 const pino = require('pino-http')(logger);
 const app = express();
@@ -12,21 +11,7 @@ app.use(cros());
 app.use(helmet());
 app.use(compression());
 
-app.get('/', (req, res) => {
-  // Clients shouldn't cache this response (always request it fresh)
-  // See: https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching#controlling_caching
-  res.setHeader('Cache-Control', 'no-cache');
-
-  // Send a 200 'OK' response with info about our repo
-  res.status(200).json({
-    status: 'ok',
-    author,
-    // TODO: change this to use your GitHub username!
-    githubUrl: 'https://github.com/NamandeepWadhwa/fragments.git',
-    version,
-  });
-});
-
+app.use('/', require('./routes'));
 // Add 404 middleware to handle any requests for resources that can't be found
 app.use((req, res) => {
   res.status(404).json({
