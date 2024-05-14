@@ -11,4 +11,12 @@ Make sure all packages are up-to-date before running scripts. The current depend
 - helmet
 - compression
 - Pino 
+## Lab02 Update
+
+We have added the authentication using `Passport BearerStrategy` and `aws-jwt-verify`. They will verify the incoming user. All the authentication code is done in the `src/auth.js` file.
+
+We have also changed the entry point from `src/server.js` to `src/index.js`.
+
+We also have changed the routes. The `/` route is now in `src/routes/index` and is not protected. The `vi/fragments` route is defined in `routes/api/get.js` and is used by `routes/api/index` and is protected.
+
 
