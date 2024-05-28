@@ -3,10 +3,8 @@
 /**
  * Get a list of fragments for the current user
  */
+const response = require('../../response');
+let fragments = [];
 module.exports = (req, res) => {
-  res.status(200).json({
-    status: 'ok',
-    // TODO: change me
-    fragments: [],
-  });
+  res.status(200).json(response.createSuccessResponse({fragments}));
 };
