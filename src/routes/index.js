@@ -23,7 +23,7 @@ router.get('/', (req, res) => {
   res.setHeader('Cache-Control', 'no-cache');
   let data={
     author,
-    githubUrl:  'https://github.com/REPLACE_WITH_YOUR_GITHUB_USERNAME/fragments',
+    githubUrl:  'https://github.com/NamandeepWadhwa/fragments',
     version,
   
   }

@@ -6,5 +6,6 @@
 const response = require('../../response');
 let fragments = [];
 module.exports = (req, res) => {
+
   res.status(200).json(response.createSuccessResponse({fragments}));
 };
