@@ -5,20 +5,18 @@ const compression = require('compression');
 
 const logger = require('./logger');
 const pino = require('pino-http')(logger);
-const bodyParser = require('body-parser');
 const app = express();
+
 app.use(pino);
 app.use(cros());
 app.use(helmet());
 const passport = require('passport');
 const authenticate = require('./auth');
 app.use(compression());
-app.use(bodyParser.json());
-app.use(bodyParser.text());
 passport.use(authenticate.strategy());
 app.use(passport.initialize());
 const response = require('./response');
-
+app.use(express.raw());
 app.use('/', require('./routes'));
 // Add 404 middleware to handle any requests for resources that can't be found
 app.use((req, res) => {

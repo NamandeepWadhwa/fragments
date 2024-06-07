@@ -21,7 +21,7 @@ class MemoryDB {
 
     const db = this.db;
     const value = db[primaryKey] && db[primaryKey][secondaryKey];
-    console.log(value);
+ 
     return Promise.resolve(value);
   }
 
