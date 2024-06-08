@@ -3,9 +3,10 @@ const response = require('../../response');
 require('dotenv').config();
 
 module.exports = async (req,res)=>{
-
+console.log(req.headers);
 
 try{
+  console.log(req.headers);
 
   const ownerId =req.user;
   if(req.body.length==0 || !Buffer.isBuffer(req.body)){
@@ -20,16 +21,19 @@ try{
   );
   await fragment.save();
   await fragment.setData(req.body);
+  const locationUrl = `${req.protocol}://${req.headers.host}${process.env.LOCATION_URL}${fragment.id}`;
   let data={
     id:fragment.id,
     ownerId:fragment.ownerId,
     createdAt:fragment.created,
     updatedAt:fragment.updated,
     type:fragment.type,
-    size:fragment.size
+    size:fragment.size,
+    location:locationUrl
   }
-  let URL=req.headers.host+process.env.LOCATION_URL+fragment.id;
-   res.status(201).location(URL).json(response.createSuccessResponse(data));
+  res.setHeader('Location',locationUrl);
+  res.status(201).json(response.createSuccessResponse(data));
+
 }
 catch(err){
   console.log(err);
