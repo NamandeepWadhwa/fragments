@@ -145,27 +145,26 @@ class Fragment {
   static isSupportedType(value) {
    
     
-    try {
-      // Parse the content-type value
-      const { type, parameters = {} } = contentType.parse(value);
+try {
+  // Parse the content-type value
+  const { type, parameters = {} } = contentType.parse(value);
 
-      // Check if the type starts with 'text/' or if the charset is 'utf-8'
-      const isText = !type || type.startsWith('text/'); // If type is not provided, consider it as text
-      const charset = parameters.charset;
-      const isUtf8 = charset && charset.toLowerCase() === 'utf-8';
+  // Check if the type starts with 'text/' or if it's 'application/json'
+  const isTextOrJson = !type || type.startsWith('text/') || type === 'application/json'; // If type is not provided, consider it as text
+  const charset = parameters.charset;
+  const isUtf8 = charset && charset.toLowerCase() === 'utf-8';
 
-      // At least one of the conditions must be true
-      if(isText|| isUtf8){
-        return true;
-      }
-      else{
-        return false;
-      }
-    } catch (e) {
-      // If there's an error parsing, it's not a supported type
-      console.error(e);
-      return false;
-    } 
+  // At least one of the conditions must be true
+  if (isTextOrJson || isUtf8) {
+    return true;
+  } else {
+    return false;
+  }
+} catch (e) {
+  // If there's an error parsing, it's not a supported type
+  console.error(e);
+  return false;
+} 
   }
 }
 
