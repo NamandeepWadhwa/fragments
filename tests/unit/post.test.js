@@ -45,11 +45,11 @@ describe('GET /v1/fragments', () => {
     test('sending unsupported fragment for authenticated user', async () => {
      
       const res = await request(app)
-    
-      .post('/v1/fragments')
-      .auth('user1@email.com', 'password1')
-      .set('Content-Type', 'application/json')
-     .send({"data":"hello"});
+        .post('/v1/fragments')
+        .auth('user1@email.com', 'password1')
+
+        .set('Content-Type', 'application/xml') // Setting an unsupported content type
+        .send('<data>hello</data>');
     
    
      expect(res.statusCode).toBe(415);
