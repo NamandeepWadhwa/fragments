@@ -47,7 +47,7 @@ COPY --from=dependencies /app /app
 ## copy the source code
 COPY . .
 ## Build the site, creating /build
-CMD npm start
+CMD ["npm start"]
 
 
 
