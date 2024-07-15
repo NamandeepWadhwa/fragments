@@ -9,11 +9,26 @@ const {Fragment} = require('../../model/fragment');
 
 module.exports = async  (req, res) => {
 
+  const isexpanded=req.query.expand=='1';
+
+
   try{
     
-    fragments=await Fragment.byUser(req.user);
+    fragments=await Fragment.byUser(req.user,isexpanded);
+    if(isexpanded){
+       fragments = fragments.map(fragment => ({
+        id: fragment.id,
+        ownerId: fragment.ownerId,
+        created: fragment.created, // Ensure dates are formatted correctly
+        updated: fragment.updated,
+        type: fragment.type,
+        size: fragment.size,
+      }));
+    }
+    console.log(response.createSuccessResponse({fragments}));
+   
     res.status(200).json(response.createSuccessResponse({fragments}));
-    console.log(fragments);
+
   }
   catch(err){
     console.log(err);
@@ -23,3 +38,4 @@ module.exports = async  (req, res) => {
   }
   
 };
+

@@ -36,4 +36,36 @@ test('sending invalid id', async () => {
    const res=await request(app).get('/v1/fragments/1232y3iuyi2') .auth('user1@email.com', 'password1');
     expect(res.statusCode).toBe(500);
 });
+test('getting fragments by id in json format',async()=>{
+  const res2 = await request(app)
+    .post('/v1/fragments')
+    .auth('user1@email.com', 'password1')
+    .set('Content-Type', 'application/json')
+    .send({"message":'hello'});
+  const id = res2.body.id;
+   const res = await request(app)
+      .get(`/v1/fragments/${id}`)
+      .auth('user1@email.com', 'password1');
+     
+      expect(res.body.senddata.data).toEqual({"message":'hello'});
+
+  });
+  test('getting fragments by id in markdown format', async () => {
+    const markdownContent = `
+      # Example Markdown Content
+
+      This is some **bold** and *italic* text.
+    `;
+    const res2 = await request(app)
+      .post('/v1/fragments')
+      .auth('user1@email.com', 'password1')
+      .set('Content-Type', 'text/markdown')
+      .send(markdownContent);
+    const id = res2.body.id;
+    const res = await request(app).get(`/v1/fragments/${id}`).auth('user1@email.com', 'password1');
+
+    expect(res.body.senddata.data).toEqual(markdownContent);
+  });
+
 });
+

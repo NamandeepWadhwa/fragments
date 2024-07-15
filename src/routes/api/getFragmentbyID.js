@@ -7,12 +7,19 @@ module.exports = async  (req, res) => {
   try{
     
     const fragment=await Fragment.byId(ownerId, id);
-    const data=await fragment.getData();
+    let data=await fragment.getData();
+    if(fragment.type=='application/json'){
+      data=JSON.parse(data.toString('utf-8'));//convert buffer to json for response
+    }
+    else{
+      data=data.toString('utf-8'); //Converting buffer to string for response
+    }
     const senddata = {
       type: fragment.type,
       size: fragment.size,
-      data: data.toString('utf-8') // Converting buffer to string for response
+      data: data
     };
+  
     
     res.status(200).json(response.createSuccessResponse({senddata}));
   }

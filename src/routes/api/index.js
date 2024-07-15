@@ -21,7 +21,14 @@ const rawBody=require('../../lib/expressMiddleWare');
 router.get('/fragments', require('./get'));
 // Other routes (POST, DELETE, etc.) will go here later on...7
 router.post('/fragments',rawBody(),require('./post'));
+router.get('/fragments/:id.:ext', require('./convertingDataTypes'));
 
 router.get('/fragments/:id',require('./getFragmentbyID'));
+
+router.get('/fragments/:id/info',require('./getFragmentInfo'));
+
+// Use a regular expression to capture the ID and extension separately
+
+
 
 module.exports = router;

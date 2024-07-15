@@ -22,6 +22,7 @@ class Fragment {
       throw new Error('ownerId is required');
     };
     
+
     this.id = id || randomUUID();
     this.ownerId = ownerId;
     this.created = created || new Date().toISOString();
@@ -38,8 +39,9 @@ class Fragment {
    * @returns Promise<Array<Fragment>>
    */
   static async byUser(ownerId, expand = false) {
+   
     // TODO
-    return listFragments(ownerId, expand);
+    return  listFragments(ownerId, expand);
 
   }
 

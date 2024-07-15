@@ -22,6 +22,7 @@ try{
   await fragment.save();
   await fragment.setData(req.body);
   const locationUrl = `${req.protocol}://${req.headers.host}${process.env.LOCATION_URL}${fragment.id}`;
+  
   let data={
     id:fragment.id,
     ownerId:fragment.ownerId,
