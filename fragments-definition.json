@@ -48,7 +48,7 @@
                     "awslogs-group":  ${{secrets.TASK_AWSLOGS_GROUPS}},
                     "awslogs-create-group":  ${{secrets.TASK_AWS_LOGS_CREATE_GROUP}},
                     "awslogs-region": ${{secrets.TASK_AWSLOGS_REGION}},
-                    "awslogs-stream-prefix": ""
+                    "awslogs-stream-prefix": ${{secrets.TASK_AWSLOGS_STREAM_PREFIX}}
                 },
                 "secretOptions": []
             },
