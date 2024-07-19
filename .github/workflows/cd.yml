@@ -62,6 +62,13 @@ jobs:
           # if we have to test or debug something. Second, we'll also replace the
           # `latest` tag, since this is our most up-to-date version.
           VERSION_TAG: ${{ github.ref_name }}
+        with:
+             task_definition:fragments-defination.json
+             container-name:fragments
+             image:${{ env.ECR_REGISTRY }}/${{ env.ECR_REPO }}:${{ env.VERSION_TAG }}
+             enviroment-varialbes:|
+              LOG_LEVEL=info
+              NODE_ENV=production
         uses: docker/build-push-action@v4
         with:
           push: true
