@@ -1,0 +1,114 @@
+{
+    "taskDefinitionArn": "arn:aws:ecs:us-east-1:471269019427:task-definition/fragments-task:1",
+    "containerDefinitions": [
+        {
+            "name": "fragments-container",
+            "image": "471269019427.dkr.ecr.us-east-1.amazonaws.com/fragments:latest",
+            "cpu": 256,
+            "memoryReservation": 512,
+            "portMappings": [
+                {
+                    "name": "fragments-container-80-tcp",
+                    "containerPort": "",
+                    "hostPort": "",
+                    "protocol": "",
+                    "appProtocol": ""
+                }
+            ],
+            "essential": true,
+            "environment": [
+                {
+                    "name": "AWS_COGNITO_POOL_ID",
+                    "value": ""
+                },
+                {
+                    "name": "PORT",
+                    "value": ""
+                },
+                {
+                    "name": "LOCATION_URL",
+                    "value": ""
+                },
+                {
+                    "name": "LOG_LEVEL",
+                    "value": ""
+                },
+                {
+                    "name": "AWS_COGNITO_CLIENT_ID",
+                    "value": ""
+                }
+            ],
+            "environmentFiles": [],
+            "mountPoints": [],
+            "volumesFrom": [],
+            "ulimits": [],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "",
+                    "awslogs-create-group": "",
+                    "awslogs-region": "",
+                    "awslogs-stream-prefix": ""
+                },
+                "secretOptions": []
+            },
+            "systemControls": []
+        }
+    ],
+    "family": "fragments-task",
+    "taskRoleArn": "",
+    "executionRoleArn": "",
+    "networkMode": "awsvpc",
+    "revision": 1,
+    "volumes": [],
+    "status": "ACTIVE",
+    "requiresAttributes": [
+        {
+            "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+        },
+        {
+            "name": "ecs.capability.execution-role-awslogs"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.ecr-auth"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.21"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.task-iam-role"
+        },
+        {
+            "name": "ecs.capability.execution-role-ecr-pull"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+        },
+        {
+            "name": "ecs.capability.task-eni"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.29"
+        }
+    ],
+    "placementConstraints": [],
+    "compatibilities": [
+        "EC2",
+        "FARGATE"
+    ],
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "cpu": "256",
+    "memory": "512",
+    "runtimePlatform": {
+        "cpuArchitecture": "X86_64",
+        "operatingSystemFamily": "LINUX"
+    },
+    "registeredAt": "",
+    "registeredBy": "",
+    "tags": []
+}
