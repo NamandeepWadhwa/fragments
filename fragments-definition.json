@@ -18,23 +18,23 @@
             "essential": true,
             "environment": [
                 {
-                    "name": "AWS_COGNITO_POOL_ID",
+                    "name": "AWS_COGNITO_POOL_ID"
                     
                 },
                 {
-                    "name": "PORT",
+                    "name": "PORT"
                     
                 },
                 {
-                    "name": "LOCATION_URL",
+                    "name": "LOCATION_URL"
                     
                 },
                 {
-                    "name": "LOG_LEVEL",
+                    "name": "LOG_LEVEL"
                     
                 },
                 {
-                    "name": "AWS_COGNITO_CLIENT_ID",
+                    "name": "AWS_COGNITO_CLIENT_ID"
                     
                 }
             ],
