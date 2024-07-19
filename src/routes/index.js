@@ -2,6 +2,7 @@
 
 const express = require('express');
 const response =require('../response');
+const {hostname} = require('os');
 
 // version and author from package.json
 const { version, author } = require('../../package.json');
@@ -20,17 +21,16 @@ router.use(`/v1`,authenticate(), require('./api'));
  * we'll respond with a 200 OK.  If not, the server isn't healthy.
  */
 router.get('/', (req, res) => {
-  // Client's shouldn't cache this response (always request it fresh)
   res.setHeader('Cache-Control', 'no-cache');
-  let data={
-    author,
-    githubUrl:  'https://github.com/NamandeepWadhwa/fragments',
-    version,
-  
-  }
-  // Send a 200 'OK' response
   res.status(200).json(
-    response.createSuccessResponse(data)
+    response.createSuccessResponse({
+      // TODO: make sure these are changed for your name and repo
+      author: author,
+      githubUrl: 'https://github.com/NamandeepWadhwa/fragments',
+      version,
+      // Include the hostname in the response
+      hostname: hostname(),
+    })
   );
 });
 
