@@ -78,7 +78,7 @@ jobs:
             NODE_ENV=production
             AWS_COGNITO_POOL_ID=${{ secrets.TASK_AWS_COGNITO_POOL_ID }}
             PORT=${{ secrets.TASK_PORT }}
-            LOCATION_URL=${{ secrets.LOCATION_URL }}
+            LOCATION_URL=${{ secrets.TASK_LOCATION_URL }}
             AWS_COGNITO_CLIENT_ID=${{ secrets.TASK_AWS_COGNITO_CLIENT_ID }}
 
       - name: Deploy Amazon ECS task definition
