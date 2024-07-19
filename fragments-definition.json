@@ -114,4 +114,6 @@
     },
  
  "registeredAt": "2024-07-19T01:29:27.911Z",
-    "registeredBy": "arn:aws:sts::471269019427:assumed-role/voclabs/user3274274=nwadhwa2@myseneca.ca",
+  "registeredBy": "arn:aws:sts::471269019427:assumed-role/voclabs/user3274274=nwadhwa2@myseneca.ca",
+  "tags": []
+  }
