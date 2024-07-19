@@ -11,31 +11,31 @@
                     "name": "fragments-container-80-tcp",
                     "containerPort": 80,
                     "hostPort": 80,
-                    "protocol": "",
-                    "appProtocol": ""
+                    "protocol": ${{secrets.TASK_PROTOCOL}},
+                    "appProtocol": ${{secrets.TASK_APPPROTOCOL}}
                 }
             ],
             "essential": true,
             "environment": [
                 {
                     "name": "AWS_COGNITO_POOL_ID",
-                    "value": ""
+                    "value":  ${{secrets.TASK_AWS_COGNITO_POOL_ID}}
                 },
                 {
                     "name": "PORT",
-                    "value": ""
+                    "value":  ${{secrets.TASK_PORT}}
                 },
                 {
                     "name": "LOCATION_URL",
-                    "value": ""
+                    "value":  ${{secrets.TASK_LOCATION_URL}}
                 },
                 {
                     "name": "LOG_LEVEL",
-                    "value": ""
+                    "value":  ${{secrets.TASK_LOG_LEVEL}}
                 },
                 {
                     "name": "AWS_COGNITO_CLIENT_ID",
-                    "value": ""
+                    "value":  ${{secrets.TASK_AWS_COGNITO_CLIENT_ID}}
                 }
             ],
             "environmentFiles": [],
@@ -45,9 +45,9 @@
             "logConfiguration": {
                 "logDriver": "awslogs",
                 "options": {
-                    "awslogs-group": "",
-                    "awslogs-create-group": "",
-                    "awslogs-region": "",
+                    "awslogs-group":  ${{secrets.TASK_AWSLOGS_GROUPS}},
+                    "awslogs-create-group":  ${{secrets.TASK_AWS_LOGS_CREATE_GROUP}},
+                    "awslogs-region": ${{secrets.TASK_AWSLOGS_REGION}},
                     "awslogs-stream-prefix": ""
                 },
                 "secretOptions": []
@@ -56,8 +56,8 @@
         }
     ],
     "family": "fragments-task",
-    "taskRoleArn": "",
-    "executionRoleArn": "",
+    "taskRoleArn": ${{secrets.TASK_TASKROLEARN}},
+    "executionRoleArn": ${{secrets.TASK_EXECUTIONROLEARN}},
     "networkMode": "awsvpc",
     "revision": 1,
     "volumes": [],
@@ -108,7 +108,7 @@
         "cpuArchitecture": "X86_64",
         "operatingSystemFamily": "LINUX"
     },
-    "registeredAt": "",
-    "registeredBy": "",
+    "registeredAt": ${{secrets.TASK_REGISTEREDAT}},
+    "registeredBy": ${{secrets.TASK_REGISTEREDBY}},
     "tags": []
 }
