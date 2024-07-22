@@ -1,33 +1,30 @@
-const {Fragment} = require('../../model/fragment');
+const { Fragment } = require('../../model/fragment');
 const response = require('../../response');
 
-module.exports = async  (req, res) => {
- const id=req.params.id;
- const ownerId=req.user;
-  try{
-    
-    const fragment=await Fragment.byId(ownerId, id);
-    let data=await fragment.getData();
-    if(fragment.type=='application/json'){
-      data=JSON.parse(data.toString('utf-8'));//convert buffer to json for response
+module.exports = async (req, res) => {
+  const id = req.params.id;
+  const ownerId = req.user;
+
+  try {
+    const fragment = await Fragment.byId(ownerId, id);
+    let data = await fragment.getData();
+
+    // Convert buffer to string or JSON based on fragment type
+    if (fragment.type === 'application/json') {
+      data = JSON.parse(data.toString('utf-8')); // Convert buffer to JSON object
+    } else {
+      data = data.toString('utf-8'); // Convert buffer to string
     }
-    else{
-      data=data.toString('utf-8'); //Converting buffer to string for response
-    }
-    const senddata = {
-      type: fragment.type,
-      size: fragment.size,
-      data: data
-    };
-  
-    
-    res.status(200).json(response.createSuccessResponse({senddata}));
-  }
-  catch(err){
+
+    let contentType = fragment.type;
+
+    // Set Content-Type header without charset if not desired
+    res.setHeader('Content-Type', contentType);
+    res.setHeader('Content-Length', fragment.size);
+    console.log(data);
+    res.status(200).send(data);
+  } catch (err) {
     console.log(err);
-    res.status(500).json(response.createErrorResponse(500,err));
+    res.status(500).json(response.createErrorResponse(500, err));
   }
-
-
-
 };

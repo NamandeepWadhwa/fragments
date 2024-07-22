@@ -28,7 +28,7 @@ describe('GET /v1/fragments/:id', () => {
       .get(`/v1/fragments/${id}`)
       .auth('user1@email.com', 'password1');
      
-      expect(res.body.senddata.data).toEqual('hello');
+      expect(res.text).toEqual('hello');
 
   });
 
@@ -47,7 +47,8 @@ test('getting fragments by id in json format',async()=>{
       .get(`/v1/fragments/${id}`)
       .auth('user1@email.com', 'password1');
      
-      expect(res.body.senddata.data).toEqual({"message":'hello'});
+     
+      expect(res.body).toEqual({"message":'hello'});
 
   });
   test('getting fragments by id in markdown format', async () => {
@@ -60,11 +61,11 @@ test('getting fragments by id in json format',async()=>{
       .post('/v1/fragments')
       .auth('user1@email.com', 'password1')
       .set('Content-Type', 'text/markdown')
-      .send(markdownContent);
+      .send(markdownContent.trim());
     const id = res2.body.id;
     const res = await request(app).get(`/v1/fragments/${id}`).auth('user1@email.com', 'password1');
 
-    expect(res.body.senddata.data).toEqual(markdownContent);
+    expect(res.text.trim()).toEqual(markdownContent.trim());
   });
 
 });

@@ -11,21 +11,21 @@ module.exports = async (req, res) => {
   try {
     const fragment = await Fragment.byId(ownerId, id);
     let data = await fragment.getData();
+    let sendingDataType = fragment.type;
 
     if (fragment.type === 'text/markdown') {
      const text= data.toString('utf-8');
-      data = md.render(text); // Render Markdown to HTML
+      data = md.render(text);
+       // Render Markdown to HTML
+       sendingDataType = 'text/html';
     } else {
       data = data.toString('utf-8'); // Convert other types to string
-    }
-    console.log(data);
-    const senddata = {
-      type: 'text/html',
-      size: fragment.size,
-      data: data, // Assign rendered HTML or plain text
-    };
+      sendingDataType = 'text/plain';
+    } 
+    res.setHeader('Content-Type', sendingDataType);
+    res.setHeader('Content-Length', fragment.size);
+    res.status(200).send(data);
 
-    res.status(200).json(response.createSuccessResponse({ senddata }));
   } catch (err) {
     console.log(err);
     res.status(500).json(response.createErrorResponse(500, err));

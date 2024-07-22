@@ -8,6 +8,7 @@ const rawBody = () => express.raw({
   limit: '5mb',
   type: (req) => {
     try {
+
      
       const { type } = contentType.parse(req);
      logger.debug(`Content-Type: ${type}`);

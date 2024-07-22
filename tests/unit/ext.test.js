@@ -25,7 +25,7 @@ describe('testing markdown conversion to html', () => {
       .auth('user1@email.com', 'password1');
     expect(res2.statusCode).toBe(200);
     // Corrected expect statement to match the expected structure
-    expect(res2.body.senddata.data).toEqual(
+    expect(res2.text).toEqual(
       expectedHtmlContent
     );
   });
