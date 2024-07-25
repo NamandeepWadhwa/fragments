@@ -52,6 +52,7 @@ jobs:
             PORT=${{ secrets.TASK_PORT }}
             LOCATION_URL=${{ secrets.TASK_LOCATION_URL }}
             AWS_COGNITO_CLIENT_ID=${{ secrets.TASK_AWS_COGNITO_CLIENT_ID }}
+            AWS_S3_BUCKET_NAME=namandeep.singh-fragments
 
       - name: Deploy Amazon ECS task definition
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
