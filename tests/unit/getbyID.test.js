@@ -34,7 +34,7 @@ describe('GET /v1/fragments/:id', () => {
 
 test('sending invalid id', async () => {
    const res=await request(app).get('/v1/fragments/1232y3iuyi2') .auth('user1@email.com', 'password1');
-    expect(res.statusCode).toBe(500);
+    expect(res.statusCode).toBe(404);
 });
 test('getting fragments by id in json format',async()=>{
   const res2 = await request(app)

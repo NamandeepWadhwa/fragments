@@ -1,6 +1,5 @@
 const { Fragment } = require('../../model/fragment');
 const response = require('../../response');
-const loggers = require('../../logger');
 
 module.exports = async (req, res) => {
   const id = req.params.id;
