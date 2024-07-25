@@ -1,5 +1,6 @@
 const { Fragment } = require('../../model/fragment');
 const response = require('../../response');
+const loggers = require('../../logger');
 
 module.exports = async (req, res) => {
   const id = req.params.id;
@@ -7,7 +8,9 @@ module.exports = async (req, res) => {
 
   try {
     const fragment = await Fragment.byId(ownerId, id);
+    
     let data = await fragment.getData();
+   
 
     // Convert buffer to string or JSON based on fragment type
     if (fragment.type === 'application/json') {
@@ -25,6 +28,6 @@ module.exports = async (req, res) => {
     res.status(200).send(data);
   } catch (err) {
     console.log(err);
-    res.status(500).json(response.createErrorResponse(500, err));
+    res.status(404).json(response.createErrorResponse(500, err));
   }
 };
