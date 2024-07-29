@@ -4,9 +4,10 @@ const response = require('../../response');
 module.exports = async (req, res) => {
   const id = req.params.id;
   const ownerId = req.user;
-
   try {
-    const fragment = await Fragment.byId(ownerId, id);
+    const fragment=await Fragment.byId(ownerId, id);
+    console.log(fragment);
+
     
     let data = await fragment.getData();
    
@@ -24,6 +25,7 @@ module.exports = async (req, res) => {
     res.setHeader('Content-Type', contentType);
     res.setHeader('Content-Length', fragment.size);
     console.log(data);
+    console.log(res.headers);
     res.status(200).send(data);
   } catch (err) {
     console.log(err);

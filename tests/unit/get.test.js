@@ -43,6 +43,7 @@ describe('GET /v1/fragments', () => {
     expect(res.body.status).toBe('ok');
     expect(Array.isArray(res.body.fragments)).toBe(true);
     expect(res.body.fragments.length).toBeGreaterThan(0);
+    console.log(res.body);
 
     const fragment = res.body.fragments.find((frag) => frag.id === fragmentId);
     expect(fragment).toBeDefined();

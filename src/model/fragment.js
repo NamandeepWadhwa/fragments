@@ -57,7 +57,7 @@ class Fragment {
     if (res===undefined){
       throw new Error('Fragment not found');
     }
-    return res;
+    return new Fragment(res);
   }
 
   /**
@@ -85,7 +85,7 @@ class Fragment {
    * Gets the fragment's data from the database
    * @returns Promise<Buffer>
    */
-  getData() {
+   getData() {
     // TODO
     return readFragmentData(this.ownerId, this.id);
   }
@@ -145,7 +145,7 @@ class Fragment {
    * @returns {boolean} true if we support this Content-Type (i.e., type/subtype)
    */
   static isSupportedType(value) {
-    console.log(value);
+   
    
     
 try {
