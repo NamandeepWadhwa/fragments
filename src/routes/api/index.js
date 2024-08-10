@@ -29,6 +29,8 @@ router.get('/fragments/:id/info',require('./getFragmentInfo'));
 
 router.delete('/fragments/:id',require('./deleteFragment'));
 
+router.put('/fragments/:id', rawBody(), require('./updateFragmentById'));
+
 // Use a regular expression to capture the ID and extension separately
 
 

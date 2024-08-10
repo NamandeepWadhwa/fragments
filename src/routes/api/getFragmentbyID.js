@@ -1,3 +1,4 @@
+const logger = require('../../logger');
 const { Fragment } = require('../../model/fragment');
 const response = require('../../response');
 
@@ -6,7 +7,6 @@ module.exports = async (req, res) => {
   const ownerId = req.user;
   try {
     const fragment=await Fragment.byId(ownerId, id);
-    console.log(fragment);
 
     
     let data = await fragment.getData();
@@ -15,17 +15,20 @@ module.exports = async (req, res) => {
     // Convert buffer to string or JSON based on fragment type
     if (fragment.type === 'application/json') {
       data = JSON.parse(data.toString('utf-8')); // Convert buffer to JSON object
-    } else {
-      data = data.toString('utf-8'); // Convert buffer to string
+    } else if(fragment.type.includes('text')) {
+      data = data.toString('utf-8'); 
+      
     }
-
+    if(fragment.type.includes('image')) {
+      logger.debug('Image detected');
+    }
     let contentType = fragment.type;
 
     // Set Content-Type header without charset if not desired
     res.setHeader('Content-Type', contentType);
     res.setHeader('Content-Length', fragment.size);
-    console.log(data);
-    console.log(res.headers);
+  
+  
     res.status(200).send(data);
   } catch (err) {
     console.log(err);

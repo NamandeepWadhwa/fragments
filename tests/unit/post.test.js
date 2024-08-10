@@ -3,7 +3,7 @@ const request = require('supertest');
 const app = require('../../src/app');
 const hash = require('../../src/hash');
 
-describe('GET /v1/fragments', () => {
+describe('Post /v1/fragments', () => {
   // If the request is missing the Authorization header, it should be forbidden
   test('unauthenticated requests are denied', () => request(app).post('/v1/fragments').expect(401));
 
@@ -48,7 +48,7 @@ describe('GET /v1/fragments', () => {
         .post('/v1/fragments')
         .auth('user1@email.com', 'password1')
 
-        .set('Content-Type', 'application/xml') // Setting an unsupported content type
+        .set('Content-Type', 'audio/mpeg') // Setting an unsupported content type
         .send('<data>hello</data>');
     
    
@@ -87,6 +87,26 @@ describe('GET /v1/fragments', () => {
        expect(res.body.status).toBe('ok');
        expect(res.body.type).toBe('text/markdown');
        // Add more assertions as per your API response structure
+     });
+
+// sending application/yml data type 
+     test('sending YAML fragment for authenticated user', async () => {
+       const yamlContent = `
+app:
+  name: MyApp
+  version: 1.0.0
+`;
+
+       const res = await request(app)
+         .post('/v1/fragments')
+         .auth('user1@email.com', 'password1')
+         .set('Content-Type', 'application/yaml')
+         .send(yamlContent);
+
+       expect(res.statusCode).toBe(201);
+       expect(res.body.ownerId).toBe(hash('user1@email.com'));
+       expect(res.body.type).toBe('application/yaml');
+       expect(res.body.size).toBe(yamlContent.length);
      });
 
 });

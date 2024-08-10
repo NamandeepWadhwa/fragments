@@ -152,17 +152,29 @@ try {
   // Parse the content-type value
   const { type, parameters = {} } = contentType.parse(value);
 
-  // Check if the type starts with 'text/' or if it's 'application/json'
-  const isTextOrJson = !type || type.startsWith('text/') || type === 'application/json'; // If type is not provided, consider it as text
-  const charset = parameters.charset;
-  const isUtf8 = charset && charset.toLowerCase() === 'utf-8';
+  // Define supported content types
+  const supportedTypes = [
+    'text/plain',
+    'text/markdown',
+    'text/html',
+    'text/csv',
+    'application/json',
+    'application/yaml',
+    'image/png',
+    'image/jpeg',
+    'image/webp',
+    'image/avif',
+    'image/gif',
+  ];
 
-  // At least one of the conditions must be true
-  if (isTextOrJson || isUtf8) {
-    return true;
-  } else {
-    return false;
-  }
+  // Check if the type is in the list of supported types
+  const isSupportedType = supportedTypes.includes(type);
+
+ const charset = parameters.charset;
+ const isUtf8 = charset ? charset.toLowerCase() === 'utf-8' : true; // charset is optional
+
+ // Return true if the type is supported and charset is valid if provided
+ return isSupportedType && isUtf8;
 } catch (e) {
   // If there's an error parsing, it's not a supported type
   console.error(e);
